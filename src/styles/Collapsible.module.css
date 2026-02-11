@@ -1,0 +1,23 @@
+.collapsible {
+background-color: transparent;
+  cursor: pointer;
+  border: none;
+  text-align: left;
+  font-size: 1em;
+  padding: 5px;
+}
+
+.content {
+  overflow: hidden;
+  transition: max-height 0.2s ease-out, opacity 0.2s ease-out;
+}
+
+.collapsed {
+  max-height: 0;
+  opacity: 0;
+}
+
+.expanded {
+  max-height: 1000px;
+  opacity: 1;
+}

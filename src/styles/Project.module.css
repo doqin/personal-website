@@ -1,0 +1,37 @@
+.container {
+    background-color: rgba(245, 245, 220, 0.5);
+    padding: 1em;
+    border: 2px solid rgba(133, 133, 91, 0.5);
+    border-radius: 25px;
+}
+
+.link a {
+    color: black;
+    font-size: 2em;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.link:hover a {
+    text-decoration: underline;
+}
+
+.link:hover::after {
+    text-decoration: none;
+    content: "¶";
+    font-size: 2em;
+    font-family: 'Times New Roman', Times, serif;
+    margin: 10px;
+}
+
+.tag {
+    padding: 8px;
+    margin: 5px;
+    background-color: rgba(0, 255, 13, 0.1);
+    border-radius: 999px;
+    border: 1px solid rgba(0, 83, 4, 0.5);
+}
+
+.tag:hover {
+    background-color: rgba(0, 255, 13, 0.3);
+}

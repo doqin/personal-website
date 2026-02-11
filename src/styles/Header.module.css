@@ -1,0 +1,36 @@
+.link {
+    text-decoration: none;
+    color: black;
+    padding: 1em;
+}
+
+.link:hover {
+    background-color:seagreen;
+    color: white;
+    border-radius: 50px;
+}
+
+.link:active {
+    background-color:darkseagreen;
+}
+
+.topbarContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.topbarContainer h2 {
+    margin: 0.6em;
+}
+
+.contentContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0 1em 0 1em;
+}
+
+.navigationBar a {
+    margin-left: 0.1em;
+    margin-right: 0.1em;
+}
