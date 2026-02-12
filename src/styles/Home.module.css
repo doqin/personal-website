@@ -1,0 +1,13 @@
+.container {
+    margin: 2.5em auto;
+    text-align: center;
+}
+
+.greeting {
+    max-width: 15em;
+    padding: 8px;
+    margin: 0 auto;
+    background-color: rgba(0, 255, 13, 0.1);
+    border-radius: 999px;
+    border: 1px solid rgba(0, 83, 4, 0.5);
+}

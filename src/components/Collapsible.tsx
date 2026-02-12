@@ -7,7 +7,7 @@ function Collapsible({header, children} : PropsWithChildren<{header: string}>) {
         setCollapsed(collapsed => !collapsed)
     };
     return (<div>
-        <button type="button" onClick={updateCollapsed} className={styles.collapsible}>{header}</button>
+        <button type="button" onClick={updateCollapsed} className={styles.collapsible}>{isCollapsed ? `▸ ` : `▾ `}<a>{header}</a></button>
         <div className={`${styles.content} ${isCollapsed ? styles.collapsed : styles.expanded}`}>
             {children}
         </div>

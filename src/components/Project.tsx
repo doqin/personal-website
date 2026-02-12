@@ -8,7 +8,7 @@ function Project({ header, repoLink, content, tags, anecdotes }: { header: strin
         </div>
         {content.map(c => <p>{c}</p>)}
         <div style={{margin: "20px 0 20px 0"}}>
-            {tags.map(t => <a className={styles.tag}>{t}</a>)}
+            {tags.map(t => <a className={styles.tag} href={`https://google.com/search?q=${encodeURIComponent(t)}`}>{t}</a>)}
         </div>
         
         <div style={{marginTop: "20px"}}>
