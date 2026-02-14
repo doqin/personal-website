@@ -2,7 +2,25 @@ import Collapsible from "./Collapsible";
 import styles from "../styles/Project.module.css";
 import type { CSSProperties } from "react";
 
-function Project({ header, repoLink, content, tags, anecdotes, style }: { header: string, repoLink: string, content: string[], tags: string[], anecdotes: string[], style?: CSSProperties}) {
+function Project({ 
+    header, 
+    repoLink, 
+    content, 
+    tags, 
+    anecdotes, 
+    style ,
+    isCollapsed,
+    setCollapsed
+}: { 
+    header: string, 
+    repoLink: string, 
+    content: string[], 
+    tags: string[], 
+    anecdotes: string[], 
+    style?: CSSProperties,
+    isCollapsed: boolean,
+    setCollapsed: React.Dispatch<React.SetStateAction<boolean>>
+}) {
     return <div className={styles.container} style={style}>
         <div className={styles.link}>
             <a href={repoLink} >{header}</a>
@@ -13,7 +31,7 @@ function Project({ header, repoLink, content, tags, anecdotes, style }: { header
         </div>
         
         <div style={{marginTop: "20px"}}>
-            <Collapsible header="Anecdote">
+            <Collapsible header="Anecdote" isCollapsed={isCollapsed} setCollapsed={setCollapsed}>
                 <div style={{marginLeft: "2em"}}>
                     {anecdotes.map(c => <><p>{c}</p></>)}
                 </div>

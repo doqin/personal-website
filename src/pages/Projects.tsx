@@ -1,10 +1,25 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, type SetStateAction } from "react";
 import Header from "../components/Header";
 import Project from "../components/Project";
 import styles from "../styles/Projects.module.css";
 import Collection from "../components/Collection";
 
-const projectList = [
+type ProjectItem = {
+    type: "item",
+    header: string,
+    repoLink: string,
+    content: string[],
+    tags: string[],
+    anecdotes: string[]
+}
+
+type ProjectGroup = {
+    type: "group",
+    groupName: string,
+    items: ProjectItem[]
+}
+
+const projectList: (ProjectGroup | ProjectItem)[] = [
     {
         type: "item",
         header: "ChitChat",
@@ -25,6 +40,7 @@ const projectList = [
         groupName: "Compiler collection",
         items: [
             {
+                type: "item",
                 header: "banh (bánh)",
                 repoLink: "https://github.com/doqin/banh",
                 content: [
@@ -38,6 +54,7 @@ const projectList = [
                 ]
             },
             {
+                type: "item",
                 header: "Bao",
                 repoLink: "https://github.com/bao-langu/bao",
                 content: [
@@ -99,6 +116,38 @@ const projectList = [
     }
 ]
 
+function ProjectElement({ project } : { project: ProjectItem }) {
+    const [isCollapsed, setCollapsed] = useState<boolean>(true);
+    return <Project isCollapsed={isCollapsed} setCollapsed={setCollapsed} header={project.header!} repoLink={project.repoLink!} content={project.content!} tags={project.tags!} anecdotes={project.anecdotes!} />
+}
+
+function ProjectCollection(
+    { group }
+        : {
+            group: ProjectGroup
+        }
+) {
+    const [collapsedStates, setCollapsedStates] = useState<boolean[]>(Array(group.items.length).fill(true))
+    const handleMouseLeave = useCallback(() => {
+        setCollapsedStates(Array(group.items.length).fill(true));
+    }, [group.items.length])
+    
+    const toggleCollapsed = useCallback((index: number, value: SetStateAction<boolean>) => {
+        setCollapsedStates(prev => {
+            const newStates = [...prev];
+            newStates[index] = typeof value === "function"
+                ? (value as (prevState: boolean) => boolean)(prev[index])
+                : value;
+            return newStates;
+        });
+    }, [])
+
+    return (<Collection collectionName={group.groupName!} onMouseLeave={handleMouseLeave}>
+        {group.items!.map((i, index) =>
+            <Project isCollapsed={collapsedStates[index]} setCollapsed={(value) => toggleCollapsed(index, value)} header={i.header} repoLink={i.repoLink} content={i.content} tags={i.tags} anecdotes={i.anecdotes} />)}
+    </Collection>)
+}
+
 function Projects() {
     const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
     useEffect(() => {
@@ -114,15 +163,14 @@ function Projects() {
             {projectList.map(p => {
                 if (p.type == "item") {
                     return (<>
-                        <Project header={p.header!} repoLink={p.repoLink!} content={p.content!} tags={p.tags!} anecdotes={p.anecdotes!} /><br/>
+                        <ProjectElement project={p as ProjectItem}/>
+                        <br />
                     </>);
                 }
                 else if (p.type == "group") {
                     return (<>
-                        <Collection collectionName={p.groupName!}>
-                            {p.items!.map(i => <Project header={i.header} repoLink={i.repoLink} content={i.content} tags={i.tags} anecdotes={i.anecdotes}/>)}
-                        </Collection>
-                        <br/>
+                        <ProjectCollection group={p as ProjectGroup} />
+                        <br />
                     </>);
                 }
             })}

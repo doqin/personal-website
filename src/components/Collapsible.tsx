@@ -1,8 +1,7 @@
-import { useState, type PropsWithChildren } from "react";
+import { type PropsWithChildren } from "react";
 import styles from "../styles/Collapsible.module.css";
 
-function Collapsible({header, children} : PropsWithChildren<{header: string}>) {
-    const [isCollapsed, setCollapsed] = useState<boolean>(true);
+function Collapsible({header, children, isCollapsed, setCollapsed} : PropsWithChildren<{header: string}> & {isCollapsed: boolean, setCollapsed: React.Dispatch<React.SetStateAction<boolean>>}) {
     const updateCollapsed = () => {
         setCollapsed(collapsed => !collapsed)
     };

@@ -1,6 +1,16 @@
 import { Children, type JSX, useLayoutEffect, useRef, useState } from "react";
 
-function Collection({collectionName, children, offsetPx = 30}: {collectionName: string, children : JSX.Element[], offsetPx?: number}) {
+function Collection({
+    collectionName, 
+    children, 
+    offsetPx = 30,
+    onMouseLeave
+}: {
+    collectionName: string, 
+    children : JSX.Element[], 
+    offsetPx?: number,
+    onMouseLeave: () => void
+}) {
     const childCount = Children.count(children);
     const [isHovered, setIsHovered] = useState(false);
     const itemRefs = useRef<Array<HTMLDivElement | null>>([]);
@@ -52,7 +62,10 @@ function Collection({collectionName, children, offsetPx = 30}: {collectionName: 
                 display: "grid"
             }}
             onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
+            onMouseLeave={() => {
+                setIsHovered(false);
+                onMouseLeave();
+            }}
         >
             {Children.map(children, (child, index) => {
                 return (
