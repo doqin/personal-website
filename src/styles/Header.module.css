@@ -1,42 +1,156 @@
-.link {
-    padding: 0.75em;
-    text-decoration: none;
-    color: black;
-    border-radius: 50px;
-    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
-}
-
-.link:hover {
-    color: white;
-    background-color:seagreen;
-}
-
-.link:active {
-    background-color:darkseagreen;
-}
-
-.topbarContainer {
+.taskbar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
     display: flex;
+    align-items: center;
+    gap: 2px;
+    height: 40px;
+    padding: 0 2px;
+    box-sizing: border-box;
+    background: var(--w7-w-grad);
+    background-color: var(--w7-w-bg);
+    border-top: 1px solid var(--w7-w-bd);
+    box-shadow: inset 0 1px 0 #fffa, 0 -4px 10px rgba(0, 0, 0, 0.35);
+}
+
+.startContainer {
+    position: relative;
+    align-self: stretch;
+    display: flex;
+}
+
+/* The orb's own glow is the hover feedback, so strip every trace of 7.css's button skin */
+.startButton {
+    position: relative;
+    width: 54px;
+    height: 100%;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    background: none !important;
+    box-shadow: none !important;
+    animation: none !important;
+    outline: none !important;
+    overflow: visible;
+    cursor: pointer;
+}
+
+.startButton::before,
+.startButton::after {
+    content: none !important;
+}
+
+/* Sprite frames are 59x54 with the orb body at the same spot (center 32,24) in each */
+.orb {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 59px;
+    height: 54px;
+    margin: -24px 0 0 -32px;
+    background: url("/icons/start-orb-sprite.png") no-repeat 0 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease-out;
+}
+
+.orbHover {
+    background-position: 0 -54px;
+    opacity: 0;
+}
+
+.orbActive {
+    background-position: 0 -108px;
+    opacity: 0;
+}
+
+.startButton:hover .orbHover,
+.startButton:focus-visible .orbHover {
+    opacity: 1;
+    transition-duration: 0.15s;
+}
+
+.startButton:active .orbActive,
+.startButton.open .orbActive {
+    opacity: 1;
+    transition-duration: 0.1s;
+}
+
+/* Flat, transparent taskbar chrome instead of 7.css's raised button skin */
+.glassButton {
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
+    min-width: 0;
+    padding: 0;
+    background: transparent !important;
+    background-image: none !important;
+    border: 1px solid transparent !important;
+    border-radius: 3px !important;
+    box-shadow: none !important;
+    color: inherit;
+    text-decoration: none;
+    animation: none !important;
+    outline: none !important;
+    transition: background 0.12s ease, border-color 0.12s ease;
 }
 
-.topbarContainer h2 {
-    margin: 0.6em;
+.glassButton::before,
+.glassButton::after {
+    content: none !important;
 }
 
-.contentContainer {
+.glassButton:hover {
+    background: linear-gradient(180deg, #ffffffa6 0%, #ffffff4d 45%, #ffffff26 50%, #ffffff59 100%) !important;
+    border-color: #ffffffb3 !important;
+    box-shadow: inset 0 0 0 1px #ffffff40 !important;
+}
+
+.glassButton.open,
+.glassButton:active {
+    background: linear-gradient(180deg, #00000030 0%, #0000001a 50%, #ffffff33 100%) !important;
+    border-color: #00000026 !important;
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.35) !important;
+}
+
+.startMenu[role="menu"] {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    margin-bottom: 0.4em;
+}
+
+.startMenuLink {
+    display: flex !important;
+    align-items: center;
+    justify-content: flex-start !important;
+    gap: 0.5em;
+}
+
+.pinnedApps {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin: 0 1em 0 1em;
+    align-items: center;
+    gap: 2px;
+    flex: 1;
+    overflow-x: auto;
+    min-width: 0;
 }
 
-.navigationBar {
-    display: flex;
-    flex-direction: row;
+.taskbarButton {
+    flex-shrink: 0;
+    width: 48px;
+    height: 38px;
+    white-space: nowrap;
 }
 
-.navigationBar a {
-    margin-left: 0.2em;
-    margin-right: 0.2em;
+.clock {
+    padding: 0 0.6em;
+    color: #000;
+    font: var(--w7-font);
+    font-variant-numeric: tabular-nums;
+    text-shadow: 0 0 8px #fff, 0 0 8px #fff, 0 0 8px #fff;
+    white-space: nowrap;
 }

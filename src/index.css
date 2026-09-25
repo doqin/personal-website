@@ -1,3 +1,28 @@
+@import "tailwindcss";
+@import "7.css/dist/7.css";
+
+html,
 body {
-    font-family: 'Roboto', sans-serif;
+    height: 100%;
+    margin: 0;
+    background: #3a6ea5 url("/background.webp") top center / cover no-repeat fixed;
+}
+
+#root {
+    min-height: 100%;
+    padding-bottom: 3.5em;
+    box-sizing: border-box;
+}
+
+/* Icon + label alignment inside window title bars */
+.title-bar-text {
+    display: flex;
+    align-items: center;
+    gap: 0.35em;
+}
+
+/* Links styled as buttons shouldn't underline on hover like plain text links */
+a[role="button"]:hover,
+a[role="button"]:focus {
+    text-decoration: none;
 }

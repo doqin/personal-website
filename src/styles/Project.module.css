@@ -1,40 +1,29 @@
 .container {
-    background-color: rgba(245, 245, 220, 1);
-    padding: 1em;
-    border: 2px solid rgba(133, 133, 91, 1);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 25px;
+    width: 100%;
 }
 
-.link a {
-    color: black;
-    font-size: 2em;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-.link:hover a {
-    text-decoration: underline;
-}
-
-.link:hover::after {
-    text-decoration: none;
-    content: "¶";
-    font-size: 2em;
-    font-family: 'Times New Roman', Times, serif;
-    margin: 10px;
+.tags {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 16px 0;
 }
 
 .tag {
     text-decoration: none;
-    color: black;
-    padding: 8px;
-    margin: 5px;
-    background-color: rgba(0, 255, 13, 0.1);
-    border-radius: 999px;
-    border: 1px solid rgba(0, 83, 4, 0.5);
+    font-size: 0.9em;
 }
 
-.tag:hover {
-    background-color: rgba(0, 255, 13, 0.3);
+.repoLink {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4em;
+    text-decoration: none;
+}
+
+.anecdote {
+    margin-left: 2em;
+    margin-top: 12px;
 }

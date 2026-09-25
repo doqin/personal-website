@@ -1,13 +1,85 @@
 .container {
-    margin: 2.5em auto;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5em;
+    padding: 2.5em 1em;
+}
+
+.welcomeWindow {
+    width: 40em;
+    max-width: 100%;
+}
+
+.notepadWindow {
+    width: clamp(min(40em, 100%), 50vw, 100%);
+}
+
+.welcomeBody {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75em;
+    text-align: left;
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5em;
+    text-align: left;
 }
 
 .greeting {
-    max-width: 15em;
-    padding: 8px;
-    margin: 0 auto;
-    background-color: rgba(0, 255, 13, 0.1);
-    border-radius: 999px;
-    border: 1px solid rgba(0, 83, 4, 0.5);
+    padding: 6px 14px;
+    background: var(--w7-el-grad);
+    border-radius: var(--w7-el-bdr);
+    border: 1px solid var(--w7-el-bd);
+    box-shadow: var(--w7-el-sd);
+}
+
+.greeting p {
+    margin: 0;
+    font-weight: bold;
+    color: var(--w7-title-c);
+}
+
+.profileRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5em;
+}
+
+.profileInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.profileRow > a {
+    flex-shrink: 0;
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.actionButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    text-decoration: none;
+}
+
+.credits {
+    margin: 0;
+    font-size: 0.75em;
+    opacity: 0.6;
 }

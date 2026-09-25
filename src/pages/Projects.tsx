@@ -1,8 +1,8 @@
-import { useEffect, useState, useCallback, type SetStateAction } from "react";
+import { Fragment, useEffect, useState, useCallback, type SetStateAction } from "react";
 import Header from "../components/Header";
-import Project from "../components/Project";
+import Project, { ProjectBody } from "../components/Project";
 import styles from "../styles/Projects.module.css";
-import Collection from "../components/Collection";
+import { FolderIcon } from "../components/icons";
 
 type ProjectItem = {
     type: "item",
@@ -127,11 +127,9 @@ function ProjectCollection(
             group: ProjectGroup
         }
 ) {
+    const [activeIndex, setActiveIndex] = useState(0);
     const [collapsedStates, setCollapsedStates] = useState<boolean[]>(Array(group.items.length).fill(true))
-    const handleMouseLeave = useCallback(() => {
-        setCollapsedStates(Array(group.items.length).fill(true));
-    }, [group.items.length])
-    
+
     const toggleCollapsed = useCallback((index: number, value: SetStateAction<boolean>) => {
         setCollapsedStates(prev => {
             const newStates = [...prev];
@@ -142,10 +140,51 @@ function ProjectCollection(
         });
     }, [])
 
-    return (<Collection collectionName={group.groupName!} onMouseLeave={handleMouseLeave}>
-        {group.items!.map((i, index) =>
-            <Project isCollapsed={collapsedStates[index]} setCollapsed={(value) => toggleCollapsed(index, value)} header={i.header} repoLink={i.repoLink} content={i.content} tags={i.tags} anecdotes={i.anecdotes} />)}
-    </Collection>)
+    return (
+        <div className="window">
+            <div className="title-bar">
+                <div className="title-bar-text"><FolderIcon size={14} /> {group.groupName}</div>
+                <div className="title-bar-controls">
+                    <button aria-label="Close"></button>
+                </div>
+            </div>
+            <div className="window-body has-space">
+                <div className="tabs">
+                    <menu role="tablist">
+                        {group.items.map((item, index) => (
+                            <button
+                                key={item.header}
+                                type="button"
+                                role="tab"
+                                aria-selected={index === activeIndex}
+                                aria-controls={`${group.groupName}-panel-${index}`}
+                                onClick={() => setActiveIndex(index)}
+                            >
+                                {item.header}
+                            </button>
+                        ))}
+                    </menu>
+                    {group.items.map((item, index) => (
+                        <article
+                            key={item.header}
+                            role="tabpanel"
+                            id={`${group.groupName}-panel-${index}`}
+                            hidden={index !== activeIndex}
+                        >
+                            <ProjectBody
+                                repoLink={item.repoLink}
+                                content={item.content}
+                                tags={item.tags}
+                                anecdotes={item.anecdotes}
+                                isCollapsed={collapsedStates[index]}
+                                setCollapsed={(value) => toggleCollapsed(index, value)}
+                            />
+                        </article>
+                    ))}
+                </div>
+            </div>
+        </div>
+    );
 }
 
 function Projects() {
@@ -162,16 +201,16 @@ function Projects() {
         <div className={windowWidth < 1200 ? styles.fixed : styles.relative}>
             {projectList.map(p => {
                 if (p.type == "item") {
-                    return (<>
+                    return (<Fragment key={p.header}>
                         <ProjectElement project={p as ProjectItem}/>
                         <br />
-                    </>);
+                    </Fragment>);
                 }
                 else if (p.type == "group") {
-                    return (<>
+                    return (<Fragment key={p.groupName}>
                         <ProjectCollection group={p as ProjectGroup} />
                         <br />
-                    </>);
+                    </Fragment>);
                 }
             })}
         </div>

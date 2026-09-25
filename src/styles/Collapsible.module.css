@@ -1,27 +1,10 @@
-.collapsible {
-	background-color: transparent;
-	cursor: pointer;
-	border: none;
-	text-align: left;
-	font-size: 1em;
-	padding: 5px;
-}
-
-.collapsible:hover a {
-	text-decoration: underline;
+/* 7.css draws the collapse triangle via `right: 100%` off the summary's own
+   left edge, so the summary needs left space reserved or the marker overflows
+   the container. */
+.summary {
+    margin-left: 14px;
 }
 
 .content {
-	overflow: hidden;
-	transition: max-height 0.2s ease-in-out, opacity 0.2s ease-in-out;
-}
-
-.collapsed {
-	max-height: 0;
-	opacity: 0;
-}
-
-.expanded {
-	max-height: 1000px;
-	opacity: 1;
+    margin-top: 6px;
 }
