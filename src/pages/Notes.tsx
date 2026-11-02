@@ -1,33 +1,13 @@
-import Header from "../components/Header"
-import { StickyNoteIcon } from "../components/icons";
+import Layout from "../components/Layout";
 
-const Notes = () => {
-    return (
-        <div>
-            <Header />
-            <div className="flex items-center justify-center p-8">
-                <div className="window" style={{ width: "24em" }}>
-                    <div className="title-bar">
-                        <div className="title-bar-text"><StickyNoteIcon size={14} /> Notes - Under Construction</div>
-                        <div className="title-bar-controls">
-                            <button aria-label="Minimize"></button>
-                            <button aria-label="Maximize"></button>
-                            <button aria-label="Close"></button>
-                        </div>
-                    </div>
-                    <div className="window-body has-space">
-                        <p>This page is under construction! :3</p>
-                        <div role="progressbar" className="marquee">
-                            <div></div>
-                        </div>
-                    </div>
-                    <div className="status-bar">
-                        <p className="status-bar-field">Status: Building...</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
-}
+const Notes = () => (
+    <Layout>
+        <section className="dq-panel centered">
+            <h1 className="dq-panel__title">Notes</h1>
+            <p>This page is under construction! :3</p>
+            <progress className="dq-progress" aria-label="Under construction" />
+        </section>
+    </Layout>
+);
 
-export default Notes
+export default Notes;

@@ -1,28 +1,16 @@
-import Header from "../components/Header";
-import { FileQuestionIcon } from "../components/icons";
+import { Link } from "react-router-dom";
+import Layout from "../components/Layout";
 
-const NotFound = () => {
-    return (
-        <div>
-            <Header />
-            <div className="flex items-center justify-center p-8">
-                <div className="window" style={{ width: "22em" }}>
-                    <div className="title-bar">
-                        <div className="title-bar-text"><FileQuestionIcon size={14} /> File Not Found</div>
-                        <div className="title-bar-controls">
-                            <button aria-label="Close"></button>
-                        </div>
-                    </div>
-                    <div className="window-body has-space">
-                        <p>The page you were looking for could not be found on this system.</p>
-                    </div>
-                    <div className="status-bar">
-                        <p className="status-bar-field">Error 404</p>
-                    </div>
-                </div>
+const NotFound = () => (
+    <Layout>
+        <section className="dq-panel centered">
+            <h1 className="dq-panel__title">Error 404</h1>
+            <p>The page you were looking for could not be found on this system.</p>
+            <div className="actions">
+                <Link to="/" className="dq-btn dq-btn--primary">Back home</Link>
             </div>
-        </div>
-    );
-};
+        </section>
+    </Layout>
+);
 
 export default NotFound;

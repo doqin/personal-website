@@ -4,6 +4,7 @@ import Projects from "./pages/Projects"
 import ErrorBoundary from "./components/ErrorBoundary"
 import Blog from "./pages/Blog"
 import Notes from "./pages/Notes"
+import Games from "./pages/Games"
 import NotFound from "./pages/NotFound"
 
 const wrapWithErrorBoundary = (Component: React.ComponentType) => {
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
   { path: "/", element: wrapWithErrorBoundary(Home) },
   { path: "/projects", element: wrapWithErrorBoundary(Projects) },
   { path: "/blog", element: wrapWithErrorBoundary(Blog) },
+  { path: "/games", element: wrapWithErrorBoundary(Games) },
   { path: "/notes", element: wrapWithErrorBoundary(Notes) },
   { path: "*", element: wrapWithErrorBoundary(NotFound) }
 ])

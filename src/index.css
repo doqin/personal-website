@@ -1,28 +1,73 @@
-@import "tailwindcss";
-@import "7.css/dist/7.css";
+@import "@doqin/dqcss";
 
-html,
-body {
-    height: 100%;
-    margin: 0;
-    background: #3a6ea5 url("/background.webp") top center / cover no-repeat fixed;
+/* Site-specific tweaks on top of dqcss */
+.page {
+    padding-block: var(--dq-space-8);
+}
+
+.profile {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--dq-space-4);
+}
+
+.profile__avatar {
+    width: 96px;
+    height: 96px;
+    border: var(--dq-border-width) solid var(--dq-color-primary);
+    box-shadow: 4px 4px 0 var(--dq-shadow-color);
+    object-fit: cover;
+}
+
+.actions,
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--dq-space-2);
+}
+
+.actions .dq-btn {
+    text-decoration: none;
+}
+
+.muted {
+    color: var(--dq-color-muted);
+    font-size: var(--dq-text-sm);
+}
+
+.anecdote summary {
+    cursor: pointer;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.anecdote summary:hover {
+    background: var(--dq-color-secondary);
+    color: var(--dq-color-secondary-fg);
+}
+
+.anecdote__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--dq-space-3);
+    margin-top: var(--dq-space-3);
+    padding-left: var(--dq-space-4);
+    border-left: var(--dq-border-width) solid var(--dq-color-secondary);
+}
+
+.centered {
+    max-width: 32rem;
+    margin-inline: auto;
 }
 
 #root {
-    min-height: 100%;
-    padding-bottom: 3.5em;
-    box-sizing: border-box;
-}
-
-/* Icon + label alignment inside window title bars */
-.title-bar-text {
     display: flex;
-    align-items: center;
-    gap: 0.35em;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-/* Links styled as buttons shouldn't underline on hover like plain text links */
-a[role="button"]:hover,
-a[role="button"]:focus {
-    text-decoration: none;
+#root > main {
+    flex: 1;
 }
